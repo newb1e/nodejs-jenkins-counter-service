@@ -2,6 +2,7 @@ node {
     
     def commit_id
     def repo_name = "newb1e/node-counter"
+    def docker_name "newb1e-node-counter"
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -16,8 +17,8 @@ node {
     }
 
     stage ('Test') {
-        sh "docker run -p 80:1080 -d --rm --name ${repo_name} ${repo_name}:${commit_id}"
-        sh "docker stop ${repo_name}"
+        sh "docker run -p 80:1080 -d --rm --name ${docker_name} ${repo_name}:${commit_id}"
+        sh "docker stop ${docker_name}"
         sh "echo test complete"
         //docker.image("node-counter:${env.BUILD_ID}").withRun('-p 80:1080 -d'){ c ->
         //sh 'pm2 start app/counter-service.js'
