@@ -16,11 +16,13 @@ node {
     }
 
     stage ('Test') {
-        sh "docker run -p 80:1080 -d --rm --name ${commit_id} ${repo_name}:${commit_id}"
+        sh "docker run -p 80:1080 -d --rm --name ${repo_name} ${repo_name}:${commit_id}"
+        sh "docker stop ${repo_name}"
+        sh "echo test complete"
         //docker.image("node-counter:${env.BUILD_ID}").withRun('-p 80:1080 -d'){ c ->
         //sh 'pm2 start app/counter-service.js'
         }
-    stage ('Deploy') {
-        sh 'echo hello'
+    stage ('Deploy to Prod') {
+        sh "echo hello to PROD"
     }
 }
