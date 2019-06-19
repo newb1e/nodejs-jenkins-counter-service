@@ -1,6 +1,6 @@
 FROM node:latest
 MAINTAINER Sergey Korolev "ovst91@gmail.com"
-RUN apt-get update -y
+RUN npm install pm2@latest -g
 COPY . /app
 WORKDIR /app
 ENTRYPOINT ["node"]
