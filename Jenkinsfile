@@ -2,7 +2,7 @@ node {
     
     def commit_id
     def repo_name = "newb1e/node-counter"
-    def docker_name "newb1e-node-counter"
+    def docker_name = "newb1e-node-counter"
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
