@@ -5,4 +5,4 @@ RUN npm install pm2@latest -g
 COPY . /app
 WORKDIR /app
 #ENTRYPOINT ["node"]
-CMD ["pm2 start app/counter-service.js"]
+CMD ["pm2 start ./app/counter-service.js"]
