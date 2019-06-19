@@ -1,7 +1,8 @@
-FROM node:latest
+FROM alpine:latest
 MAINTAINER Sergey Korolev "ovst91@gmail.com"
+RUN apk add --update nodejs nodejs-npm
 RUN npm install pm2@latest -g
 COPY . /app
 WORKDIR /app
-#ENTRYPOINT ["pm2 start"]
-#CMD ["app/counter-service.js"]
+#ENTRYPOINT ["node"]
+CMD ["pm2 start app/counter-service.js"]
