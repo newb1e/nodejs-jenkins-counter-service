@@ -22,7 +22,8 @@ node {
         //sh 'pm2 start app/counter-service.js'
         }
     stage ('Deploy to Prod') {
-        if (sh "docker ps -q -f name=${docker_name}") {
+        def docker_run = sh "docker ps -q -f name=${docker_name}"
+        if (docker_run != null) {
             sh "docker stop ${docker_name}"
         } 
         else {
