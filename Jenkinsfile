@@ -38,6 +38,6 @@ node {
     }
 
     stage ('Cleanup') {
-        sh "docker system prune -af"
+        sh "echo cleanup"
     }
 }
