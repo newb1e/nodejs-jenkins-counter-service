@@ -38,6 +38,6 @@ node {
     }
 
     stage ('Cleanup') {
-        sh "docker rmi ${repo_name}:${commit_id}"
+        sh "docker system prune -af"
     }
 }
