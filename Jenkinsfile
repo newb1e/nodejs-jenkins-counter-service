@@ -2,7 +2,7 @@ node {
     
     def commit_id
     def repo_name = "newb1e/node-counter"
-    def docker_name = "newb1e-node-counter"
+    def docker_name = " "
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -23,6 +23,7 @@ node {
         }
     stage ('Deploy to Prod') {
         def docker_run = sh "docker ps -q -f name=${docker_name}"
+        sh "echo ${docker_run}"
         if (docker_run != null) {
             sh "docker stop ${docker_name}"
         } 
