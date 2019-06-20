@@ -38,6 +38,6 @@ node {
     }
 
     stage ('Cleanup') {
-        sh "docker rmi ${repo_name}:latest"
+        sh "docker rmi ${repo_name}:${commit_id}"
     }
 }
