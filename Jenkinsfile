@@ -24,7 +24,7 @@ node {
     stage ('Deploy to Prod') {
         //sh "docker stop ${docker_name}"
         //sh "docker run -p 80:1080 -d --rm --name ${docker_name} ${repo_name}:${commit_id}"
-        bash "./deploy-to-prod.sh ${docker_name} ${repo_name} ${commit_id}"
+        sh "./deploy-to-prod.sh ${docker_name} ${repo_name} ${commit_id}"
         sh "echo hello to PROD"
     }
 
