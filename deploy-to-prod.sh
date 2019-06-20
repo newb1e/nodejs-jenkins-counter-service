@@ -5,6 +5,5 @@
 # $3 = commit_id
 if [ "$(docker ps -q -f name=$1)" ]; then
     docker stop $1
-else
-    docker run -p 80:1080 -d --rm --name $1 $2:$3
 fi
+docker run -p 80:1080 -d --rm --name $1 $2:$3

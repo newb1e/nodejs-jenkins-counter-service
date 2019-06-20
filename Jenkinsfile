@@ -3,6 +3,7 @@ node {
     def commit_id
     def repo_name = "newb1e/node-counter"
     def docker_name = "newb1e-node-counter"
+    
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -10,34 +11,26 @@ node {
         }
 
     stage ('Build/Push') {
-       //def app = docker.build("node-counter:${env.BUILD_ID}")
        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
            def app = docker.build("${repo_name}:${commit_id}", '.').push()
         }
     }
 
     stage ('Test') {
-        sh "echo test complete"
-        //docker.image("node-counter:${env.BUILD_ID}").withRun('-p 80:1080 -d'){ c ->
-        //sh 'pm2 start app/counter-service.js'
+        sh "echo test started"
+        sh "echo test completed"
         }
     stage ('Deploy to Prod') {
-        /*
-        def docker_run
-        sh "docker_run=`docker ps -q -f name=${docker_name}`"
-        if (docker_run != null) {
-            sh "docker stop ${docker_name}"
-        } 
-        else {
-            sh "docker run -p 80:1080 -d --rm --name ${docker_name} ${repo_name}:${commit_id}"
-        }
-        */
         sh "chmod +x deploy-to-prod.sh"
+    // The script starts a container named newb1e-node-counter.
+    // If already running, container is stopped and being ran again.
         sh "./deploy-to-prod.sh ${docker_name} ${repo_name} ${commit_id}"
         sh "echo hello to PROD"
     }
 
     stage ('Cleanup') {
-        sh "echo cleanup"
+        sh "echo cleanup starting..."
+        sh "docker image prune -af"
+        sh "echo cleanup finished."
     }
 }
