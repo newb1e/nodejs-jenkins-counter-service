@@ -1,5 +1,4 @@
 node {
-    
     def commit_id
     def repo_name = "newb1e/node-counter"
     def docker_name = "newb1e-node-counter"
@@ -19,7 +18,8 @@ node {
     stage ('Test') {
         sh "echo test started"
         sh "echo test completed"
-        }
+    }
+
     stage ('Deploy to Prod') {
         sh "chmod +x deploy-to-prod.sh"
     // The script starts a container named newb1e-node-counter.
