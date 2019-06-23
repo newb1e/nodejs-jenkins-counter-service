@@ -1,4 +1,4 @@
-node {
+node(label: 'builder') {
     def commit_id
     def repo_name = "newb1e/node-counter"
     def docker_name = "newb1e-node-counter"
