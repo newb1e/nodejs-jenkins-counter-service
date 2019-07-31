@@ -2,6 +2,8 @@ var http = require('http');
 
 var userCount = 0;
 
+var port = 3000;
+
 var server = http.createServer(function (req, res) {
 
     if (req.method === 'POST')
@@ -17,6 +19,6 @@ var server = http.createServer(function (req, res) {
 
 });
 
-server.listen(1080);
+server.listen(port);
 
-console.log('server running...');
+console.log('server running on port ' + port);
